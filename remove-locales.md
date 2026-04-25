@@ -27,7 +27,7 @@ sudo rm /usr/share/cursor/resources/app/ThirdPartyNotices.txt /usr/share/cursor/
 
 ```bash
 sudo rm /usr/lib/slack/locales/!("en-GB.pak"|"en-US.pak")
-sudo rm /usr/lib/slack/LICENSE /usr/lib/slack/resources/LICENSES.chromium.html
+sudo rm /usr/lib/slack/LICENSE /usr/lib/slack/resources/LICENSES.chromium.html /usr/lib/slack/LICENSES-linux.json
 ```
 
 ### Super Productivity
