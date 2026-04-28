@@ -1,6 +1,5 @@
-# =============================================================================
-# Enhanced Directory Listing with lsd
-# =============================================================================
+#### Enhanced Directory Listing with lsd
+
 
 # Tree views with increasing depth and common ignores
 alias l1='lsd --tree --depth 1'
@@ -24,21 +23,15 @@ alias lg='lsd -lFS --total-size --git --group-directories-first'            # So
 # Bonus: Human-readable sizes + icons
 alias lsh='lsd -lhF --total-size --group-directories-first'
 
-# =============================================================================
-# pnpm / Node Development
-# =============================================================================
+
+#### pnpm / bun / Node Development
+
 
 alias pd='pnpm run dev'                                                     # Dev server
-alias pi='pnpm install'
-alias pa='pnpm add'
-alias prm='pnpm remove'
-alias pr='pnpm run'
-alias pt='pnpm test'
-alias pb='pnpm build'
+alias bd='bun dev'                                                     # Dev server
 
-# =============================================================================
-# Git Aliases – Navigation, Inspection & Common Operations
-# =============================================================================
+#### Git Aliases
+
 
 # Pretty log views
 alias gl='git log --oneline --graph --decorate=full --all'                  # Compact graph with all branches

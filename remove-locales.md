@@ -15,6 +15,12 @@ sudo rm /usr/share/code/resources/app/ThirdPartyNotices.txt /usr/share/code/LICE
 sudo rm /usr/share/code/locales/!("en-GB.pak"|"en-US.pak")
 sudo rm -fdr /usr/share/code/resources/app/licenses
 ```
+### LM-Studio
+
+```bash
+sudo rm /opt/LM-Studio/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/LM-Studio/LICENSE.electron.txt /opt/LM-Studio/LICENSES.chromium.html
+```
 
 ### Cursor
 
