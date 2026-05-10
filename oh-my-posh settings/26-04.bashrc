@@ -117,15 +117,15 @@ if ! shopt -oq posix; then
 fi
 
 #------- Customized themes
-#eval "$(oh-my-posh init bash --config ~/.OMP/atomic.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/atomicBit.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/chips.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/cloud-native-azure.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/emodipt-extend.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/huvix.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/negligible.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/nordtron.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/ys.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/atomic.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/atomicBit.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/chips.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/cloud-native-azure.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/emodipt-extend.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/huvix.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/negligible.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/nordtron.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/ys.omp.json)"
 #------- oh-my-posh themes from website
 #eval "$(oh-my-posh init bash --config ~/.oh-my-posh/1_shell.omp.json)"
 #eval "$(oh-my-posh init bash --config ~/.oh-my-posh/M365Princess.omp.json)"

@@ -1,86 +1,161 @@
-# 🆕🆒🆓 Clean & Minimal Ubuntu
+# 🆕 Clean & Minimal Ubuntu — Post-Install Setup Guide
 
-When installing Ubuntu, choose **DEFAULT SELECTION** (Just the essentials, web browser and basic utilities). All of the below removal and installation is to make Ubuntu more suitable for development.
+> Covers **Ubuntu 24.04 LTS** and **Ubuntu 26.04 LTS**. Differences between versions are clearly marked.
+> When installing Ubuntu, choose **Default Selection** (just the essentials — web browser and basic utilities).
 
-**bash_aliases** _commands aliases for git & pnpm_
+---
 
-**install-mise-help.md** _commands & setups for mise_
+## Table of Contents
 
-**install-nodejs-help.md** _commands & setups for nodejs_
+- [System Info & Useful Commands](#-system-info--useful-commands)
+- [Update & Upgrade](#-update--upgrade)
+- [Purge Unnecessary Packages](#-purge-unnecessary-packages)
+- [Remove Printing Support](#-remove-printing-support)
+- [Remove Old Kernels](#-remove-old-kernels)
+- [Install Google Chrome](#-install-google-chrome)
+- [Install Node.js](#-install-nodejs)
+- [Global NPM Packages](#-global-npm-packages)
+- [Git & SSH Setup](#-git--ssh-setup)
+- [oh-my-posh Setup](#-oh-my-posh-setup)
+- [Export / Load GNOME Settings](#-export--load-gnome-settings)
+- [XTRADEB Packages](#-xtradeb-packages)
+- [Suggested & Optional Packages](#-suggested--optional-packages)
+- [Remove Language Locales](#-remove-language-locales)
+- [Useful Scripts](#-useful-scripts)
 
-**install-windows11-help.md** _commands for Windows 10/11 after clean installation_
+---
 
-**remove locales.md** _Remove languages other than english from Chrome & electron-based apps. more than 45+ MB space is saved by these commands_
-
-### useful commands to remember
+## 💻 System Info & Useful Commands
 
 ```bash
-# check your Ubuntu version
+# Check Ubuntu version
 lsb_release -a
-# Displays system hostname and key system information
+
+# Display hostname and key system info
 hostnamectl
-# Show Size and Sort by Largest (Most Useful)
+
+# Show disk usage — sorted largest first
 du -h -s * | sort -h -r
 ```
-### Export/Load settings
 
-```bash
-# This removes all user-configured GNOME desktop settings.
-dconf reset -f /
-# export/load GNOME desktop settings.
-dconf dump / > full-gnome-backup-2026-05-10.conf
-dconf load / < full-gnome-backup-2026-05-10.conf
-# export/load GNOME desktop extensions settings.
-dconf dump /org/gnome/shell/extensions/ > aa-gnome-exts-settings.conf
-dconf load /org/gnome/shell/extensions/ < aa-gnome-exts-settings.conf
-```
+---
 
+## ⭐ Update & Upgrade
 
-
-## ⭐⭐⭐ First: Update & Upgrade
+### Install nala (better apt frontend)
 
 ```bash
 sudo apt update
 sudo apt install nala
 sudo nala full-upgrade
+```
 
+Edit nala config for binary file sizes:
+
+```bash
+sudo nano /etc/nala/nala.conf
+```
+
+```ini
+# Set to true for MiB, false for MB
+filesize_binary = true
+```
+
+### Standard apt update/upgrade
+
+```bash
 sudo apt update -y && sudo apt upgrade -y
+
+# Useful apt helpers
 apt search <keyword>
 sudo apt --fix-broken install
 sudo apt autoremove --purge
 sudo apt autopurge
 ```
 
-### Configure **nala**
+---
 
-edit this file `sudo nano /etc/nala/nala.conf`:
+## 🔥 Purge Unnecessary Packages
+
+### Remove Ubuntu Report & Crash Popups
+
+**Ubuntu 24.04**
 
 ```bash
-# Set to true for `MiB` false for `MB`
-filesize_binary = true
+sudo apt purge ubuntu-report apport apport-gtk
+```
+
+**Ubuntu 26.04**
+
+```bash
+sudo apt purge ubuntu-report apport apport-core-dump-handler apport-gtk
+```
+
+### Remove Accessibility & Internationalization (~390–437 MB freed)
+
+**Ubuntu 24.04**
+
+```bash
+# Accessibility tools (117 MB)
+sudo apt purge brltty orca gnome-accessibility-themes fonts-noto-cjk eog
+
+# Blob errors — safe to ignore
+sudo apt purge speech-dispatcher* libpinyin* ibus* pocketsphinx* espeak* liblouis* hplip*
+
+sudo apt autoremove --purge
+```
+
+**Ubuntu 26.04**
+
+```bash
+# Accessibility tools (117 MB)
+sudo apt purge brltty orca gnome-accessibility-themes fonts-noto-cjk
+
+# Blob errors — safe to ignore (294 MB)
+sudo apt purge speech-dispatcher* libpinyin* ibus* pocketsphinx* espeak* liblouis* hplip*
+
+# Cleanup (37 MB)
+sudo apt autoremove --purge
 ```
 
 ---
 
-### Remove Old Kernels
+## 🖨️ Remove Printing Support (~18–24 MB freed)
 
-First, identify installed kernels: Then remove specific versions:
+```bash
+sudo apt purge 'cups*' 'foomatic*' \
+  printer-driver-brlaser* \
+  printer-driver-foo2zjs-common* \
+  printer-driver-ptouch* \
+  printer-driver-c2esp* \
+  printer-driver-min12xxw* \
+  printer-driver-sag-gdi*
+
+sudo apt autoremove --purge
+```
+
+---
+
+## 🧹 Remove Old Kernels
+
+First, identify what's installed:
 
 ```bash
 dpkg --list | grep -Ei 'linux-image|linux-headers|linux-tools|linux-modules|linux-hwe'
+```
 
-dpkg --list | grep -i linux-image
-dpkg --list | grep -i linux-headers
-dpkg --list | grep -i linux-tools
-dpkg --list | grep -i linux-modules
-dpkg --list | grep -i linux-hwe
-sudo dpkg --purge package1 package2 package3 ...
-sudo apt purge package1 package2 package3 ...
+Then purge specific old versions (replace with actual package names):
+
+```bash
+sudo dpkg --purge package1 package2 package3
+sudo apt purge package1 package2 package3
 sudo apt autopurge
 sudo update-grub
 ```
 
-## 🌐🌐🌐 Install Latest Google Chrome
+---
+
+## 🌐 Install Google Chrome
 
 ```bash
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -89,63 +164,49 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 ---
 
-## 🆘🆘🆘 oh-my-posh Setup
+## 🎴 Install Node.js
 
-### Installation
+### Node.js 22.x LTS (stable)
 
 ```bash
-sudo bash -c "$(curl -s https://ohmyposh.dev/install.sh)" -- -d /usr/bin
-
-# move themes directory
-sudo mv /root/.cache/oh-my-posh/themes/ ~/.oh-my-posh
-sudo chmod 777 .oh-my-posh/
-
-# Refresh bash after changes
-exec bash
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash -
+sudo apt install -y nodejs
 ```
 
-### Files in oh-my-posh backups
-
-## FOLDERS
-
-**[omp]**
-customized oh-my-posh themes
-
-**[WindowsPowerShell]**
-configuration file in Documents folder for MS Windows
-
-## FILES
-
-**[themes-oh-my-posh.txt]**
-simple paths for themes in ~/.oh-my-posh
-
-**[24-04.bashrc]**
-customized .bashrc of ubuntu 24.04 with oh-my-posh themes commented at the end
-**[]**
-
-### Configure Bash
-
-You can use the enclosed .bashrc for the selection of themes, just uncomment the required theme. Refresh bash after selecting theme:
-
----
-
-## 🛸💽🚚 XTRADEB Packages
-
-Unofficial Ubuntu application packages maintained by xtradeb. in ungoogled-chromium extensions can not be installed, so i prefer mostly chromium.
-
-[xtradeb PPA](https://launchpad.net/~xtradeb/+archive/ubuntu/apps)
+### Node.js 24.x LTS (latest)
 
 ```bash
-sudo add-apt-repository ppa:xtradeb/apps -y
-sudo nala update
-sudo nala install yt-dlp parabolic calibre ungoogled-chromium chromium gnucash intellij-idea-community pycharm-community
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo bash -
+sudo nala install -y nodejs
 ```
 
 ---
 
-## 📦📦📦 Git & SSH Setup
+## 📦 Global NPM Packages
 
-This setup is recommended if you have only single git account, for multiple git accounts, a complex setup is required.
+```bash
+sudo npm install -g \
+  npm@latest \
+  corepack@latest \
+  npm-check-updates \
+  typescript \
+  pnpm@latest \
+  yarn \
+  vite \
+  bun
+
+# Check for outdated global packages
+sudo npm outdated -g --depth=0
+
+# Update all global packages
+sudo npm update -g
+```
+
+---
+
+## 📜 Git & SSH Setup
+
+> Recommended for single GitHub accounts. Multiple accounts require additional configuration.
 
 ### Git Configuration
 
@@ -155,44 +216,41 @@ git config --global user.email "your.email@example.com"
 git config --global color.ui auto
 git config --global core.editor "code --wait"
 
-
-# use diff-so-fancy and bat to make things look better
+# Better diffs with diff-so-fancy and bat
 git config --global core.pager "diff-so-fancy | bat -p"
-git config --global interactive.diffFilter "diff-so-fancy --patch"\n
+git config --global interactive.diffFilter "diff-so-fancy --patch"
 
-# useful for cases of multiple remotes
+# Push to all remotes at once
 git config --global alias.pushall "\!git remote | xargs -L1 git push --all"
 
-# kill the enabled-by-default branch pager (why was this a thing?)
+# Disable branch pager (it's on by default for no good reason)
 git config --global pager.branch false
 ```
 
 ### SSH Setup
 
-#### ✅ 1. Check for Existing SSH Keys
+#### 1. Check for Existing SSH Keys
 
 ```bash
 ls -al ~/.ssh
-mkdir .ssh
-cd .ssh
 ```
 
-If keys exist, proceed to steps 3 & 6.
+If keys exist, skip to steps 3 and 6.
 
-#### ✅ 2. Generate a New SSH Key (if none exist)
+#### 2. Generate a New SSH Key
 
 ```bash
 ssh-keygen -t ed25519 -C "your.email@example.com"
 ```
 
-#### ✅ 3. Add SSH Key to SSH Agent
+#### 3. Add Key to SSH Agent
 
 ```bash
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 ```
 
-#### ✅ 4. Copy the Public Key
+#### 4. Copy the Public Key
 
 ```bash
 cat ~/.ssh/id_ed25519.pub
@@ -204,11 +262,11 @@ cat ~/.ssh/id_ed25519.pub
 chmod 600 ~/.ssh/id_ed25519
 ```
 
-#### ✅ 5. Add SSH Key to GitHub
+#### 5. Add SSH Key to GitHub
 
-Add the public key from step 4 to your GitHub account settings.
+Paste the output of step 4 into **GitHub → Settings → SSH and GPG keys → New SSH key**.
 
-#### ✅ 6. Test the GitHub Connection
+#### 6. Test the GitHub Connection
 
 ```bash
 rm ~/.ssh/known_hosts
@@ -218,16 +276,268 @@ ssh -T git@github.com
 
 ---
 
-## 🪛📜💻 Important in Scripts folder
+## 🆘 oh-my-posh Setup
 
-**[ubuntu-debullshit.sh](https://github.com/polkaulfield/ubuntu-debullshit)**
-Purges snaps, installs flatpaks, and restores vanilla GNOME.
+### Installation
 
-**[snap-remover.sh](https://gist.github.com/lassekongo83/808b19e034c05d10ac4e3cc259808e4e)**
-Completely remove snaps from Ubuntu.
+```bash
+sudo bash -c "$(curl -s https://ohmyposh.dev/install.sh)" -- -d /usr/bin
 
-**[snap-cleaner.sh](https://github.com/sakibulalikhan/snap-cleaner)**
-Free up disk space by deleting unnecessary Snap package revisions and caches.
+# Move themes to home directory
+sudo mv /root/.cache/oh-my-posh/themes/ ~/.oh-my-posh
+sudo chmod 777 ~/.oh-my-posh/
 
-**[ubuntu_cleanup.sh](https://gist.github.com/Limbicnation/6763b69ab6a406790f3b7d4b56a2f6e8)**
-A comprehensive system cleanup script that safely removes unnecessary files to free up disk space.
+# Refresh bash
+exec bash
+```
+
+### Notable Files
+
+| File / Folder | Description |
+|---|---|
+| `[omp]` | Customized oh-my-posh themes |
+| `[WindowsPowerShell]` | Config for Windows (Documents folder) |
+| `terminal-themes-good.txt` | these themes are much better than rest |
+| `24-04.bashrc` | Customized `.bashrc` with themes (uncomment to activate) |
+| `26-04.bashrc` | Customized `.bashrc` with themes (uncomment to activate) |
+
+
+### Configure Bash
+
+Use the enclosed `.bashrc` — uncomment your preferred theme at the bottom, then refresh:
+
+```bash
+exec bash
+```
+
+---
+
+## 💾 Export / Load GNOME Settings
+
+```bash
+# Reset ALL user-configured GNOME settings (destructive — use carefully)
+dconf reset -f /
+
+# Export full GNOME settings
+dconf dump / > full-gnome-backup-2026-05-10.conf
+
+# Load full GNOME settings
+dconf load / < full-gnome-backup-2026-05-10.conf
+
+# Export GNOME extension settings only
+dconf dump /org/gnome/shell/extensions/ > aa-gnome-exts-settings.conf
+
+# Load GNOME extension settings only
+dconf load /org/gnome/shell/extensions/ < aa-gnome-exts-settings.conf
+```
+
+---
+
+## 🛸 XTRADEB Packages
+
+Unofficial Ubuntu packages maintained by xtradeb. Prefer **chromium** over ungoogled-chromium since extensions can be installed in it.
+
+[xtradeb PPA on Launchpad](https://launchpad.net/~xtradeb/+archive/ubuntu/apps)
+
+```bash
+sudo add-apt-repository ppa:xtradeb/apps -y
+sudo nala update
+sudo nala install \
+  yt-dlp parabolic calibre \
+  ungoogled-chromium chromium \
+  gnucash \
+  intellij-idea-community pycharm-community
+```
+
+---
+
+## ✴️ Suggested & Optional Packages
+
+### Essential Tools
+
+```bash
+sudo nala install \
+  curl git gh \
+  gnome-shell-extension-manager gnome-tweaks \
+  lsd \
+  nautilus-admin \
+  gedit gedit-plugins \
+  transmission \
+  synaptic
+```
+
+### Thunar File Browser
+
+```bash
+sudo nala install thunar thunar-media-tags-plugin
+```
+
+### Multimedia
+
+**Ubuntu 24.04**
+
+```bash
+sudo nala install \
+  totem amberol \
+  gstreamer1.0-libav \
+  gstreamer1.0-plugins-bad \
+  gstreamer1.0-plugins-ugly
+```
+
+**Ubuntu 26.04**
+
+```bash
+sudo nala install \
+  gstreamer1.0-libav \
+  gstreamer1.0-plugins-bad \
+  gstreamer1.0-plugins-ugly \
+  showtime \
+  gapless \
+  vlc \
+  amberol \
+  gnome-video-trimmer
+```
+
+### Optional Programs
+
+**Ubuntu 24.04**
+
+```bash
+sudo nala install \
+  ptyxis vlc file-roller rar unrar \
+  gnome-decoder gnome-calendar \
+  adb fastboot foliate loupe
+```
+
+**Ubuntu 26.04**
+
+```bash
+sudo nala install \
+  gnome-calendar errands wike wordbook \
+  adb fastboot \
+  file-roller rar unrar \
+  gnome-decoder
+```
+
+---
+
+## ⚛️ Remove Language Locales (~50+ MB saved per app)
+
+Removes unused locale files from Chromium-based apps. Only English variants are kept.
+
+### Google Chrome
+
+```bash
+sudo rm /opt/google/chrome/locales/!("en-GB.pak"|"en-US.pak")
+```
+
+### VS Code
+
+```bash
+sudo rm /usr/share/code/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /usr/share/code/resources/app/ThirdPartyNotices.txt \
+        /usr/share/code/LICENSES.chromium.html \
+        /usr/share/code/resources/app/LICENSE.rtf
+sudo rm -fdr /usr/share/code/resources/app/licenses
+```
+
+### Cursor
+
+```bash
+sudo rm /usr/share/cursor/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /usr/share/cursor/resources/app/ThirdPartyNotices.txt \
+        /usr/share/cursor/LICENSES.chromium.html \
+        /usr/share/cursor/resources/app/LICENSE.txt
+```
+
+### LM Studio
+
+```bash
+sudo rm /opt/LM-Studio/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/LM-Studio/LICENSE.electron.txt /opt/LM-Studio/LICENSES.chromium.html
+```
+
+### Slack
+
+```bash
+sudo rm /usr/lib/slack/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /usr/lib/slack/LICENSE \
+        /usr/lib/slack/resources/LICENSES.chromium.html \
+        /usr/lib/slack/LICENSES-linux.json
+```
+
+### Brave Browser
+
+```bash
+sudo rm /opt/brave.com/brave/locales/!("en-GB.pak"|"en-US.pak")
+```
+
+### Obsidian
+
+```bash
+sudo rm /opt/Obsidian/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/Obsidian/LICENSES.chromium.html /opt/Obsidian/LICENSE.electron.txt
+```
+
+### GitKraken
+
+```bash
+sudo rm /usr/share/gitkraken/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /usr/share/gitkraken/LICENSES.chromium.html /usr/share/gitkraken/LICENSE.electron
+```
+
+### Joplin
+
+```bash
+sudo rm /opt/Joplin/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/Joplin/LICENSES.chromium.html /opt/Joplin/LICENSE.electron.txt
+```
+
+### FreeTube
+
+```bash
+sudo rm /opt/FreeTube/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/FreeTube/LICENSES.chromium.html /opt/FreeTube/LICENSE.electron.txt
+```
+
+### Super Productivity
+
+```bash
+sudo rm /opt/Super\ Productivity/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/Super\ Productivity/LICENSES.chromium.html \
+        /opt/Super\ Productivity/LICENSE.electron.txt
+```
+
+### ONLYOFFICE
+
+```bash
+sudo rm /opt/onlyoffice/desktopeditors/locales/!("en-US.pak")
+sudo rm -rf /opt/onlyoffice/desktopeditors/converter/empty/!("en-US"|"default")
+sudo rm -rf /opt/onlyoffice/desktopeditors/converter/templates/!("EN")
+sudo rm -rf /opt/onlyoffice/desktopeditors/dictionaries/!("en_US")
+```
+
+### TickTick
+
+```bash
+sudo rm /opt/TickTick/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/TickTick/LICENSE.electron.txt /opt/TickTick/LICENSES.chromium.html
+```
+
+### Replit
+
+```bash
+sudo rm /usr/lib/replit/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /usr/lib/replit/LICENSES.chromium.html
+```
+
+---
+
+## 🪛 Useful Scripts
+
+| Script | Description |
+|---|---|
+| [ubuntu-debullshit.sh](https://github.com/polkaulfield/ubuntu-debullshit) | Purges snaps, installs flatpaks, restores vanilla GNOME |
+| [snap-remover.sh](https://gist.github.com/lassekongo83/808b19e034c05d10ac4e3cc259808e4e) | Completely removes snaps from Ubuntu |
+| [snap-cleaner.sh](https://github.com/sakibulalikhan/snap-cleaner) | Deletes unnecessary Snap revisions and caches |
+| [ubuntu_cleanup.sh](https://gist.github.com/Limbicnation/6763b69ab6a406790f3b7d4b56a2f6e8) | Comprehensive cleanup script to free up disk space |

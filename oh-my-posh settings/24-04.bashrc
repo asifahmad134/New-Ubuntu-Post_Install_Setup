@@ -121,12 +121,12 @@ eval "$(/usr/bin/mise activate bash)"
 #dir env
 eval "$(direnv hook bash)"
 #------- Customized themes
-#eval "$(oh-my-posh init bash --config ~/.OMP/atomic.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/atomicBit.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/chips.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/cloud-native-azure.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/huvix.omp.json)"
-#eval "$(oh-my-posh init bash --config ~/.OMP/negligible.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/atomic.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/atomicBit.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/chips.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/cloud-native-azure.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/huvix.omp.json)"
+#eval "$(oh-my-posh init bash --config ~/.omp/negligible.omp.json)"
 eval "$(oh-my-posh init bash --config ~/.OMP/ys.omp.json)"
 #------- Default themes
 #eval "$(oh-my-posh init bash --config ~/.oh-my-posh/1_shell.omp.json)"
