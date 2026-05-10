@@ -21,6 +21,8 @@ lsb_release -a
 hostnamectl
 # Show Size and Sort by Largest (Most Useful)
 du -h -s * | sort -h -r
+# This removes all user-configured GNOME desktop settings.
+dconf reset -f /
 ```
 
 ## ⭐⭐⭐ First: Update & Upgrade

@@ -29,8 +29,8 @@ sudo apt autoremove --purge
 ### Purge Accessibility & Internationalization Packages (390+47 MB freed)
 
 ```bash
-# remove ubuntu-report & appcrash popup
-sudo apt purge ubuntu-report apport apport-gtk
+# remove ubuntu-report & apport  apport-core-dump-handler  apport-gtk
+sudo apt purge ubuntu-report apport  apport-core-dump-handler  apport-gtk
 # Accessibility (117MB)
 sudo apt purge brltty orca gnome-accessibility-themes fonts-noto-cjk
 # blob errors, ignore (294MB)
@@ -70,7 +70,7 @@ sudo update-grub
 ```bash
 # must have programs
 sudo apt install nala
-sudo nala install curl git gh gnome-shell-extension-manager gnome-tweaks synaptic transmission lsd nautilus-admin gedit gedit-plugins
+sudo nala install curl git gnome-shell-extension-manager gnome-tweaks synaptic transmission lsd nautilus-admin gedit gedit-plugins
 ```
 # thunar file browser
 ```bash
@@ -78,14 +78,20 @@ sudo nala install thunar thunar-media-tags-plugin
 ```
 # multimedia programs
 ```bash
-sudo nala install showtime gapless gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
+sudo nala install gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
+sudo nala install showtime 
+sudo nala install gapless
+sudo nala install vlc
+sudo nala install amberol
+sudo nala install gnome-video-trimmer
 ```
 # Optional Programs
 ```bash
-sudo nala install vlc file-roller rar unrar gnome-decoder adb fastboot 
-sudo nala install amberol
-sudo nala install gnome-console
-sudo nala install errandss
+sudo nala install gnome-calendar
+sudo nala install errands
 sudo nala install wike
-sudo nala install gnome-video-trimmer
+sudo nala install adb fastboot
+sudo nala install file-roller rar unrar
+sudo nala install gnome-decoder
+sudo nala install wordbook
 ```

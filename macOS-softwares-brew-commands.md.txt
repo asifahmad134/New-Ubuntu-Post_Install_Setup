@@ -1,0 +1,37 @@
+# macoS links for softwares
+
+### brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+### Mole Cleaner Tool
+
+curl -fsSL https://raw.githubusercontent.com/tw93/mole/main/install.sh | bash
+
+
+###  neovim
+brew install neovim
+
+### mise
+brew install mise
+
+### Maple Mono Font
+# Maple Mono
+brew install --cask font-maple-mono
+# Maple Mono NF
+brew install --cask font-maple-mono-nf
+
+# Ghostty
+brew install --cask ghostty
+
+# kitty
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+ 
+# macshot - screenshot tool
+brew install --cask macshot
+
+# Pearcleaner
+brew install --cask pearcleaner
+
+# PureMac
+brew install --cask puremac
+
