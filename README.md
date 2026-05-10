@@ -21,9 +21,21 @@ lsb_release -a
 hostnamectl
 # Show Size and Sort by Largest (Most Useful)
 du -h -s * | sort -h -r
+```
+### Export/Load settings
+
+```bash
 # This removes all user-configured GNOME desktop settings.
 dconf reset -f /
+# export/load GNOME desktop settings.
+dconf dump / > full-gnome-backup-2026-05-10.conf
+dconf load / < full-gnome-backup-2026-05-10.conf
+# export/load GNOME desktop extensions settings.
+dconf dump /org/gnome/shell/extensions/ > aa-gnome-exts-settings.conf
+dconf load /org/gnome/shell/extensions/ < aa-gnome-exts-settings.conf
 ```
+
+
 
 ## ⭐⭐⭐ First: Update & Upgrade
 
