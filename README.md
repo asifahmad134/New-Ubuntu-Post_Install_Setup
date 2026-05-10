@@ -142,6 +142,17 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 git config --global color.ui auto
 git config --global core.editor "code --wait"
+
+
+# use diff-so-fancy and bat to make things look better
+git config --global core.pager "diff-so-fancy | bat -p"
+git config --global interactive.diffFilter "diff-so-fancy --patch"\n
+
+# useful for cases of multiple remotes
+git config --global alias.pushall "\!git remote | xargs -L1 git push --all"
+
+# kill the enabled-by-default branch pager (why was this a thing?)
+git config --global pager.branch false
 ```
 
 ### SSH Setup
