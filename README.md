@@ -362,8 +362,6 @@ sudo nala install amberol showtime gapless vlc gnome-video-trimmer
 
 ### Optional Programs combined
 
-**Ubuntu 24.04**
-
 ```bash
 sudo nala install file-roller rar unrar adb fastboot foliate
 ```
