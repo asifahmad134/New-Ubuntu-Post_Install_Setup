@@ -40,32 +40,13 @@ du -h -s * | sort -h -r
 
 ---
 
-## ⭐ Update & Upgrade
-
-### Install nala (better apt frontend)
+## ⭐ Update, Upgrade, Fixes & **nala** 
 
 ```bash
 sudo apt update
-sudo apt install nala
-sudo nala full-upgrade
-```
-
-Edit nala config for binary file sizes:
-
-```bash
-sudo nano /etc/nala/nala.conf
-```
-
-```ini
-# Set to true for MiB, false for MB
-filesize_binary = true
-```
-
-### Standard apt update/upgrade
-
-```bash
+sudo apt upgrade
+# combined
 sudo apt update -y && sudo apt upgrade -y
-
 # Useful apt helpers
 apt search <keyword>
 sudo apt --fix-broken install
@@ -73,6 +54,16 @@ sudo apt autoremove --purge
 sudo apt autopurge
 ```
 
+### Install nala (better apt frontend)
+```bash
+sudo apt install nala
+sudo nano /etc/nala/nala.conf
+```
+Edit nala config for binary file sizes:
+```ini
+# Set to true for MiB, false for MB
+filesize_binary = true
+```
 ---
 
 ## 🔥 Purge Unnecessary Packages
@@ -91,33 +82,18 @@ sudo apt purge ubuntu-report apport apport-gtk
 sudo apt purge ubuntu-report apport apport-core-dump-handler apport-gtk
 ```
 
-### Remove Accessibility & Internationalization (~390–437 MB freed)
-
-**Ubuntu 24.04**
+### Ubuntu 24.04 / 26.04 — Remove Accessibility & Internationalization Packages (~390–437 MB)
 
 ```bash
-# Accessibility tools (117 MB)
-sudo apt purge brltty orca gnome-accessibility-themes fonts-noto-cjk eog
-
-# Blob errors — safe to ignore
-sudo apt purge speech-dispatcher* libpinyin* ibus* pocketsphinx* espeak* liblouis* hplip*
-
-sudo apt autoremove --purge
-```
-
-**Ubuntu 26.04**
-
-```bash
-# Accessibility tools (117 MB)
+# Accessibility tools (~117 MB)
 sudo apt purge brltty orca gnome-accessibility-themes fonts-noto-cjk
 
-# Blob errors — safe to ignore (294 MB)
+# Optional language/input/speech packages. Blob errors, safe to ignore (~294 MB)
 sudo apt purge speech-dispatcher* libpinyin* ibus* pocketsphinx* espeak* liblouis* hplip*
 
-# Cleanup (37 MB)
+# Cleanup unused dependencies (~37 MB)
 sudo apt autoremove --purge
 ```
-
 ---
 
 ## 🖨️ Remove Printing Support (~18–24 MB freed)
@@ -285,7 +261,7 @@ sudo bash -c "$(curl -s https://ohmyposh.dev/install.sh)" -- -d /usr/bin
 
 # Move themes to home directory
 sudo mv /root/.cache/oh-my-posh/themes/ ~/.oh-my-posh
-sudo chmod 777 ~/.oh-my-posh/
+sudo chown -R $USER:$USER ~/.oh-my-posh
 
 # Refresh bash
 exec bash
@@ -356,14 +332,7 @@ sudo nala install \
 ### Essential Tools
 
 ```bash
-sudo nala install \
-  curl git gh \
-  gnome-shell-extension-manager gnome-tweaks \
-  lsd \
-  nautilus-admin \
-  gedit gedit-plugins \
-  transmission \
-  synaptic
+sudo nala install curl git gnome-calendar gnome-shell-extension-manager gnome-tweaks nautilus-admin gedit gedit-plugins transmission synaptic
 ```
 
 ### Thunar File Browser
@@ -372,58 +341,47 @@ sudo nala install \
 sudo nala install thunar thunar-media-tags-plugin
 ```
 
-### Multimedia
+### Multimedia Plugins
+
+```bash
+sudo nala install gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
+```
+
+
+### Multimedia **Ubuntu 24.04**
+
+```bash
+sudo nala install amberol totem vlc loupe
+```
+
+### Multimedia **Ubuntu 26.04**
+
+```bash
+sudo nala install amberol showtime gapless vlc gnome-video-trimmer
+```
+
+### Optional Programs combined
 
 **Ubuntu 24.04**
 
 ```bash
-sudo nala install \
-  totem amberol \
-  gstreamer1.0-libav \
-  gstreamer1.0-plugins-bad \
-  gstreamer1.0-plugins-ugly
+sudo nala install file-roller rar unrar adb fastboot foliate
 ```
 
-**Ubuntu 26.04**
+### Optional Programs **Ubuntu 26.04**
 
 ```bash
-sudo nala install \
-  gstreamer1.0-libav \
-  gstreamer1.0-plugins-bad \
-  gstreamer1.0-plugins-ugly \
-  showtime \
-  gapless \
-  vlc \
-  amberol \
-  gnome-video-trimmer
-```
-
-### Optional Programs
-
-**Ubuntu 24.04**
-
-```bash
-sudo nala install \
-  ptyxis vlc file-roller rar unrar \
-  gnome-decoder gnome-calendar \
-  adb fastboot foliate loupe
-```
-
-**Ubuntu 26.04**
-
-```bash
-sudo nala install \
-  gnome-calendar errands wike wordbook \
-  adb fastboot \
-  file-roller rar unrar \
-  gnome-decoder
+sudo nala install errands wike wordbook
 ```
 
 ---
 
 ## ⚛️ Remove Language Locales (~50+ MB saved per app)
 
-Removes unused locale files from Chromium-based apps. Only English variants are kept.
+Removes unused locale files from Chromium-based apps. Only English variants are kept. These works in bash with extglob enabled, but won't work in all shells. Consider adding:
+```bash
+shopt -s extglob  # Add before the rm commands
+```
 
 ### Google Chrome
 
