@@ -357,7 +357,7 @@ sudo nala install amberol totem vlc loupe
 ### Multimedia **Ubuntu 26.04**
 
 ```bash
-sudo nala install amberol showtime gapless vlc gnome-video-trimmer
+sudo nala install amberol gapless showtime clapper vlc gnome-video-trimmer
 ```
 
 ### Optional Programs combined
