@@ -318,11 +318,7 @@ Unofficial Ubuntu packages maintained by xtradeb. Prefer **chromium** over ungoo
 ```bash
 sudo add-apt-repository ppa:xtradeb/apps -y
 sudo nala update
-sudo nala install \
-  yt-dlp parabolic calibre \
-  ungoogled-chromium chromium \
-  gnucash \
-  intellij-idea-community pycharm-community
+sudo nala install yt-dlp parabolic calibre ungoogled-chromium chromium
 ```
 
 ---
@@ -332,13 +328,7 @@ sudo nala install \
 ### Essential Tools
 
 ```bash
-sudo nala install curl git gnome-calendar gnome-shell-extension-manager gnome-tweaks nautilus-admin gedit gedit-plugins transmission synaptic
-```
-
-### Thunar File Browser
-
-```bash
-sudo nala install thunar thunar-media-tags-plugin
+sudo nala install curl git gnome-calendar gnome-shell-extension-manager gnome-tweaks nautilus-admin gedit gedit-plugins transmission synaptic thunar
 ```
 
 ### Multimedia Plugins
@@ -346,7 +336,6 @@ sudo nala install thunar thunar-media-tags-plugin
 ```bash
 sudo nala install gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
 ```
-
 
 ### Multimedia **Ubuntu 24.04**
 
@@ -357,7 +346,7 @@ sudo nala install amberol totem vlc loupe
 ### Multimedia **Ubuntu 26.04**
 
 ```bash
-sudo nala install amberol gapless showtime clapper vlc gnome-video-trimmer
+sudo nala install gapless showtime clapper vlc gnome-video-trimmer libheif-plugin-libde265
 ```
 
 ### Optional Programs combined
@@ -376,10 +365,7 @@ sudo nala install errands wike wordbook
 
 ## ⚛️ Remove Language Locales (~50+ MB saved per app)
 
-Removes unused locale files from Chromium-based apps. Only English variants are kept. These works in bash with extglob enabled, but won't work in all shells. Consider adding:
-```bash
-shopt -s extglob  # Add before the rm commands
-```
+Removes unused locale files from Chromium-based apps. Only English variants are kept.
 
 ### Google Chrome
 
