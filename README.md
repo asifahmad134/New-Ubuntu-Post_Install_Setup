@@ -40,7 +40,7 @@ du -h -s * | sort -h -r
 
 ---
 
-## ⭐ Update, Upgrade, Fixes & **nala** 
+## ⭐ Update, Upgrade, Fixes & **nala**
 
 ```bash
 sudo apt update
@@ -142,17 +142,15 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 ## 🎴 Install Node.js
 
-### Node.js 22.x LTS (stable)
 
 ```bash
+# Node.js 22.x LTS (stable)
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash -
-sudo apt install -y nodejs
-```
-
-### Node.js 24.x LTS (latest)
-
-```bash
+# Node.js 24.x LTS (latest)
 curl -fsSL https://deb.nodesource.com/setup_24.x | sudo bash -
+# Node.js 26.x LTS (latest)
+curl -fsSL https://deb.nodesource.com/setup_26.x | sudo bash -
+
 sudo nala install -y nodejs
 ```
 
@@ -359,6 +357,12 @@ sudo nala install file-roller rar unrar adb fastboot foliate
 
 ```bash
 sudo nala install errands wike wordbook
+```
+
+### Dev packages for mise/ruby workflow
+
+```bash
+sudo nala install build-essential libssl-dev libreadline-dev pkg-config
 ```
 
 ---

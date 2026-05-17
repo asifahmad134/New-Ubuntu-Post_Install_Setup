@@ -1,0 +1,37 @@
+[settings]
+
+# Prefer prebuilt binaries whenever possible
+all_compile = false
+
+# Per-language compile preferences
+python.compile = false
+ruby.compile = false
+node.compile = false
+
+# Parallel installations. Set close to CPU thread count
+jobs = 8
+
+# Compatibility with ecosystem version files
+legacy_version_file = true
+
+# Ensure mise shims win over PATH pollution
+activate_aggressive = true
+
+# Auto-update plugin metadata weekly
+plugin_autoupdate_last_check_duration = "1 week"
+
+# Cleaner output
+verbose = false
+quiet = false
+
+# Better missing-tool behavior
+status = { missing_tools = "if_other_versions_installed" }
+
+# Enable experimental improvements
+experimental = true
+
+# UI theme
+color_theme = "catppuccin"
+
+[tools]
+ruby = "latest"
