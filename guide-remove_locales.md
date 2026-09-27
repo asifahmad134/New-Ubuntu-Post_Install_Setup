@@ -9,7 +9,6 @@ sudo rm /usr/share/qt6/translations/!("en-GB.pak"|"en-US.pak")
 sudo rm /opt/helium/locales/!("en-GB.pak"|"en-US.pak")
 ```
 
-
 ### Google Chrome
 
 ```bash
@@ -64,6 +63,13 @@ sudo rm /usr/lib/slack/LICENSE \
 
 ```bash
 sudo rm /opt/brave.com/brave/locales/!("en-GB.pak"|"en-US.pak")
+```
+
+### GenOffice
+
+```bash
+sudo rm /opt/GenOffice/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/GenOffice/LICENSES.chromium.html /opt/GenOffice/LICENSE.electron.txt
 ```
 
 ### Obsidian
@@ -130,4 +136,11 @@ sudo rm /opt/TickTick/LICENSE.electron.txt /opt/TickTick/LICENSES.chromium.html
 ```bash
 sudo rm /usr/lib/replit/locales/!("en-GB.pak"|"en-US.pak")
 sudo rm /usr/lib/replit/LICENSES.chromium.html
+```
+
+### Butler
+
+```bash
+sudo rm /opt/Butler/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/Butler/LICENSES.chromium.html /opt/Butler/LICENSE.electron.txt
 ```

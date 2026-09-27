@@ -141,6 +141,7 @@ sudo npm outdated -g --depth=0
 # Update all global packages
 sudo npm update -g
 ```
+
 ## 🆘 oh-my-posh Setup
 
 ### Installation
@@ -199,8 +200,8 @@ sudo nala install curl git gnome-calendar gnome-shell-extension-manager gnome-tw
 sudo nala install gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libheif-plugin-libde265 gst-audio-thumbnailer  gst-video-thumbnailer
 
 # Optional
-sudo nala install adb fastboot foliate file-roller rar unrar synaptic
-sudo nala install errands wike wordbook
+sudo nala install adb fastboot foliate dconf-edit file-roller rar unrar synaptic
+sudo nala install errands wike wordbook imagemagick graphicsmagick
 ```
 
 ### Multimedia **Ubuntu 24.04**

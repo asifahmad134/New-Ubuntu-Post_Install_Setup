@@ -1,6 +1,7 @@
 # Rails 8+ & Bundler Cheat Sheet
 
 ## 🎨 Add Tailwind CSS
+
 Rails 8+ uses the `tailwindcss-rails` gem with a standalone executable (no Node.js required).
 
 ```bash
@@ -17,6 +18,7 @@ bin/dev
 ---
 
 ## ⚡ System & Performance Setup
+
 Speed up gem installations and keep system tools up-to-date.
 
 ```bash
@@ -36,6 +38,7 @@ bundle env
 ## 📦 Gem Management & Updates
 
 ### Inspect Gems
+
 ```bash
 # List all gems in the current bundle
 bundle list
@@ -48,6 +51,7 @@ bundle outdated --group development
 ```
 
 ### Update Gems
+
 ```bash
 # Update all gems within Gemfile constraints
 bundle update
@@ -58,6 +62,7 @@ bundle update rails devise puma
 ```
 
 ### Maintenance & Cleanup
+
 ```bash
 # Verify dependencies and check lockfile status
 bundle check
