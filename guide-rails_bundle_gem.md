@@ -1,4 +1,15 @@
-# Rails 8+ & Bundler Cheat Sheet
+# 💎💎💎 Install Ruby/Rails on Ubuntu through mise
+
+```bash
+sudo nala update
+sudo apt install build-essential rustc libssl-dev libyaml-dev zlib1g-dev libgmp-dev git
+curl https://mise.run | sh
+echo 'eval "$(~/.local/bin/mise activate)"' >> ~/.bashrc
+source ~/.bashrc
+mise use -g ruby
+# for writebook
+sudo nala install -y libvips libvips-dev
+```
 
 ## 🎨 Add Tailwind CSS
 

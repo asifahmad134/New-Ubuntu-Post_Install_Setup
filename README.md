@@ -133,7 +133,7 @@ sudo nala install -y nodejs
 sudo npm install -g npm@latest corepack@latest npm-check-updates typescript pnpm@latest yarn vite
 # bun will be 350++ MiB
 sudo npm install -g bun
-sudo npm config set allow-scripts=bun,yarn --location=user
+sudo npm config set allow-scripts=pnpm,bun,yarn --location=user
 
 # Check for outdated global packages
 sudo npm outdated -g --depth=0
@@ -213,15 +213,9 @@ sudo nala install amberol totem vlc loupe
 ### Multimedia **Ubuntu 26.04**
 
 ```bash
-sudo nala install gapless showtime clapper gnome-video-trimmer vlc
+sudo nala install gapless showtime clapper gnome-video-trimmer eartag
+sudo nala install vlc
 ```
-
-### Dev packages for mise/ruby workflow
-
-```bash
-sudo nala install build-essential libssl-dev libreadline-dev pkg-config
-```
-
 ### qBittorrent
 
 ```bash
@@ -233,4 +227,6 @@ sudo nala install qbittorrent
 
 [ubuntu-debullshit.sh](https://github.com/polkaulfield/ubuntu-debullshit)
 
-Purges snaps, installs flatpaks, restores vanilla GNOME |
+Purges snaps, installs flatpaks, restores vanilla GNOME
+
+
