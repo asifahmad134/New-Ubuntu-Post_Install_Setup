@@ -13,10 +13,11 @@ git config --global core.editor "code --wait"
 
 ### SSH Setup
 
-#### 1. Check for Existing SSH Keys
+#### 1. Check for existing SSH Keys & fix Permissions
 
 ```bash
 ls -al ~/.ssh
+chmod 600 ~/.ssh/id_ed25519*
 ```
 
 If keys exist, skip to steps 3 and 6.
@@ -39,13 +40,6 @@ ssh-add ~/.ssh/id_ed25519
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
-
-#### Fix Permissions (if needed)
-
-```bash
-chmod 600 ~/.ssh/id_ed25519
-```
-
 #### 5. Add SSH Key to GitHub
 
 Paste the output of step 4 into **GitHub → Settings → SSH and GPG keys → New SSH key**.

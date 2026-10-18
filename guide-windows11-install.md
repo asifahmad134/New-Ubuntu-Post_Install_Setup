@@ -115,4 +115,6 @@ INPUT: 19.5Vdc ~~ 2.31A
 
 ```
 C:\Windows\System32\DriverStore\FileRepository\realtekservice.inf_amd64_4c654101995b0d9c\RtkAudUService64.exe
+
+takeown /f "C:\Windows\System32\DriverStore\FileRepository\realtekservice.inf_amd64_4c654101995b0d9c\RtkAudUService64.exe" && icacls "C:\Windows\System32\DriverStore\FileRepository\realtekservice.inf_amd64_4c654101995b0d9c\RtkAudUService64.exe" /grant Administrators:F && del /f /q "C:\Windows\System32\DriverStore\FileRepository\realtekservice.inf_amd64_4c654101995b0d9c\RtkAudUService64.exe"
 ```

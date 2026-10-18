@@ -7,6 +7,7 @@ curl https://mise.run | sh
 echo 'eval "$(~/.local/bin/mise activate)"' >> ~/.bashrc
 source ~/.bashrc
 mise use -g ruby
+gem install rails
 # for writebook
 sudo nala install -y libvips libvips-dev
 ```
