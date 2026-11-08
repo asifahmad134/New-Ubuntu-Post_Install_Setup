@@ -5,7 +5,10 @@ Removes unused locale files from Chromium-based apps. Only English variants are 
 ### Mix
 
 ```bash
-sudo rm /usr/share/qt6/translations/!("en-GB.pak"|"en-US.pak")
+sudo find /usr/share/qt6/translations -maxdepth 1 -type f \
+  ! -name 'en-GB.pak' \
+  ! -name 'en-US.pak' \
+  -delete
 sudo rm /opt/helium/locales/!("en-GB.pak"|"en-US.pak")
 ```
 

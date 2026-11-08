@@ -28,7 +28,7 @@ sudo apt upgrade
 # combined
 sudo apt update -y && sudo apt upgrade -y
 # Useful apt helpers
-apt search <keyword>
+sudo apt search <keyword>
 sudo apt --fix-broken install
 sudo apt autoremove --purge
 sudo apt autopurge
@@ -37,7 +37,7 @@ sudo apt autopurge
 ### Install nala (better apt frontend)
 
 ```bash
-sudo apt install nala
+sudo apt install nala curl
 
 # Edit nala config for binary file sizes:
 # Set to true for MiB, false for MB
@@ -131,9 +131,7 @@ sudo nala install -y nodejs
 
 ```bash
 sudo npm install -g npm@latest corepack@latest npm-check-updates typescript pnpm@latest yarn vite
-# bun will be 350++ MiB
-sudo npm install -g bun
-sudo npm config set allow-scripts=pnpm,bun,yarn --location=user
+sudo npm config set allow-scripts=pnpm,yarn --location=user
 
 # Check for outdated global packages
 sudo npm outdated -g --depth=0
@@ -172,10 +170,10 @@ dconf dump / > ubuntu2604.conf
 dconf load / < ubuntu2604.conf
 
 # Export GNOME extension settings only
-dconf dump /org/gnome/shell/extensions/ > aa-gnome-exts-settings.conf
+dconf dump /org/gnome/shell/extensions/ > gnome-exts-settings.conf
 
 # Load GNOME extension settings only
-dconf load /org/gnome/shell/extensions/ < aa-gnome-exts-settings.conf
+dconf load /org/gnome/shell/extensions/ < gnome-exts-settings.conf
 ```
 
 ## 🛸 XTRADEB Packages
@@ -194,14 +192,16 @@ sudo nala install yt-dlp parabolic calibre ungoogled-chromium chromium
 
 ```bash
 # Essential Tools
-sudo nala install curl git gnome-calendar gnome-shell-extension-manager gnome-tweaks nautilus-admin gedit gedit-plugins thunar 7zip
+sudo nala install git gnome-calendar gnome-shell-extension-manager gnome-tweaks nautilus-admin gedit gedit-plugins adb fastboot foliate
 
 # Multimedia Plugins
 sudo nala install gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libheif-plugin-libde265 gst-audio-thumbnailer  gst-video-thumbnailer
 
 # Optional
-sudo nala install adb fastboot foliate dconf-edit file-roller rar unrar synaptic
-sudo nala install errands wike wordbook imagemagick graphicsmagick
+sudo nala install dconf-edit file-roller rar unrar synaptic errands wike wordbook gnome-decoder
+
+# thunar file manager install creates other icons
+sudo nala install thunar thunar-media-tags-plugin
 ```
 
 ### Multimedia **Ubuntu 24.04**

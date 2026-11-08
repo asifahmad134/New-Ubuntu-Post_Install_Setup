@@ -1,11 +1,13 @@
 window-width = 132
 window-height = 32
 
-# font-family = "GoogleSansCode NF"
-font-family = "JetBrainsMonoNL NF"
+#font-family = "GoogleSansCode NF"
+#font-family = "JetBrainsMonoNL NF"
+font-family = "UbuntuSansMono NF"
+
 
 font-thicken = true
-font-style = Medium
+font-style = Bold
 font-style-bold = ExtraBold
 font-size = 12
 font-feature = +liga

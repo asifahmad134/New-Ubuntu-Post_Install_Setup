@@ -10,7 +10,7 @@
   "editor.cursorBlinking": "expand",
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.foldingStrategy": "auto",
-  "editor.fontFamily": "JetBrainsMono NF",
+  "editor.fontFamily": "UbuntuSansMono NF",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
