@@ -18,6 +18,13 @@ sudo rm /opt/helium/locales/!("en-GB.pak"|"en-US.pak")
 sudo rm /opt/google/chrome/locales/!("en-GB.pak"|"en-US.pak")
 ```
 
+### AMP
+
+```bash
+sudo rm /opt/amp/locales/!("en-GB.pak"|"en-US.pak")
+sudo rm /opt/amp/LICENSES.chromium.html /opt/amp/LICENSE.electron.txt
+```
+
 ### VS Code
 
 ```bash

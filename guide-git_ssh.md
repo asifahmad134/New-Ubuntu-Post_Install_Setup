@@ -40,6 +40,7 @@ ssh-add ~/.ssh/id_ed25519
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
+
 #### 5. Add SSH Key to GitHub
 
 Paste the output of step 4 into **GitHub → Settings → SSH and GPG keys → New SSH key**.
